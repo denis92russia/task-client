@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 
 import { HttpRequesterService } from '../../services/http-requester.service';
 import { urlExistValidator } from '../../validators/url-exist.validator';
@@ -19,7 +19,11 @@ export class MainComponent implements OnInit {
   ngOnInit() {
     this.urlShoterForm = this.build.group(
       {
-        urlOrigin: ['', [Validators.required],[urlExistValidator(this.request)]],
+        urlOrigin: new FormControl('', { 
+          validators: [Validators.required],
+          asyncValidators: [urlExistValidator(this.request)],
+          updateOn: 'blur'
+        }),
         urlShot: ['']
       }
     )

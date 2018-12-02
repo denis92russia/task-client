@@ -6,6 +6,7 @@ import { HttpClientModule} from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainComponent } from './components/main/main.component';
+import { HttpRequesterService } from './services/http-requester.service';
 
 
 @NgModule({
@@ -20,7 +21,7 @@ import { MainComponent } from './components/main/main.component';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [HttpRequesterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
