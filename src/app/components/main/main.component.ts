@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { HttpRequesterService } from '../../services/http-requester.service';
+import { urlExistValidator } from '../../validators/url-exist.validator';
+
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -8,13 +11,16 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class MainComponent implements OnInit {
   urlShoterForm: FormGroup
-  constructor(private build: FormBuilder) { }
+  constructor(
+    private build: FormBuilder,
+    private request: HttpRequesterService
+  ) { }
 
   ngOnInit() {
     this.urlShoterForm = this.build.group(
       {
-        urlOrigin: ['', Validators.required],
-        urlShot: ['',[]]
+        urlOrigin: ['', [Validators.required],[urlExistValidator(this.request)]],
+        urlShot: ['']
       }
     )
   }
