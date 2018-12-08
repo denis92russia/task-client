@@ -1,0 +1,32 @@
+.error-message{
+    top: 2px;
+    right: 2px;
+    z-index: 10;
+    color: #ff000f;
+    background-color: #fff;
+}
+.body-urlform{
+    width: 600px;
+    margin: auto;
+    padding: 20px;
+    box-sizing: border-box;
+    border: 2px solid #000fff;
+    background-color: #fff;
+}
+.cover{
+    height: 100vh;
+    padding-top: 300px;
+    background-size: cover;
+    background-size: 100%;
+    background: url('https://cs4.pikabu.ru/post_img/big/2016/08/26/11/1472236990193670389.jpg') no-repeat center center fixed;
+}
+
+.create-url{
+    margin-left: 10px;
+    border-radius: 5px;
+    border: 1px solid #888;
+}
+
+.create-url:disabled {
+    background-color: #dddddd;
+}

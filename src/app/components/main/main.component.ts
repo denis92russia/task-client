@@ -10,7 +10,8 @@ import { urlExistValidator } from '../../validators/url-exist.validator';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
-  urlShoterForm: FormGroup
+  urlShoterForm: FormGroup;
+  generatedShorUrl: string = 'none'
   constructor(
     private build: FormBuilder,
     private request: HttpRequesterService
@@ -20,7 +21,10 @@ export class MainComponent implements OnInit {
     this.urlShoterForm = this.build.group(
       {
         urlOrigin: new FormControl('', { 
-          validators: [Validators.required],
+          validators: [
+            Validators.required, 
+            Validators.pattern(/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/gi)
+          ],
           asyncValidators: [urlExistValidator(this.request)],
           updateOn: 'blur'
         }),

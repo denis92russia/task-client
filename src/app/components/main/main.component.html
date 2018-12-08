@@ -1,20 +1,37 @@
-<div>
+<div class="cover">
+<div class="body-urlform">
   <form [formGroup]="urlShoterForm">
     <div class="row">
       <div class="col-md-4">
         <label>Origin Url</label>
       </div>
-      <div class="col-md-8">
-        <input type="text" formControlName="urlOrigin">
+      <div class="col-md-8 d-flex align-items-center">
+        <div  class="col position-relative p-0">
+            <input type="text" class="w-100" formControlName="urlOrigin">
+            <div class="position-absolute error-message" *ngIf="urlShoterForm.controls.urlOrigin.hasError('pattern')">Url is incorrect</div>
+            <div class="position-absolute error-message" *ngIf="urlShoterForm.controls.urlOrigin.hasError('notExist')">Url is not exist</div>
+        </div>
+
+        <button class="create-url btn-light" [disabled]="urlShoterForm.controls.urlOrigin.invalid">Create short url</button>
+       
       </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <label>Generated Url</label>
+      </div>
+      <div class="col-md-8">
+          <label>{{generatedShorUrl}}</label>
+        </div>
     </div>
     <div class="row">
       <div class="col-md-4">
         <label>Short Url</label>
       </div>
       <div class="col-md-8">
-        <input type="text" formControlName="urlShot">
+        <input type="text" class="w-100" formControlName="urlShot">
       </div>
     </div>
   </form>
+</div>
 </div>

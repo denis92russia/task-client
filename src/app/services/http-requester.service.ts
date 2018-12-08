@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +11,7 @@ export class HttpRequesterService {
   constructor(private http: HttpClient) { }
 
   checkUrl(url) {
-    
-    return this.http.get('http://127.0.0.1:4000/checkUrl/'+url, { headers: this.headers});
+    const params = new HttpParams().set('url', url);
+    return this.http.get( environment.baseUrl + '/checkUrl/', { headers: this.headers, params: params});
   }
 }
