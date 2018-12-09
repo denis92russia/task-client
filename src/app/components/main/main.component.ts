@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 
 import { HttpRequesterService } from '../../services/http-requester.service';
 import { urlExistValidator } from '../../validators/url-exist.validator';
+import { shortUrlValidator } from '../../validators/short-url.validator';
 
 @Component({
   selector: 'app-main',
@@ -23,14 +24,28 @@ export class MainComponent implements OnInit {
         urlOrigin: new FormControl('', { 
           validators: [
             Validators.required, 
-            Validators.pattern(/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/gi)
+            Validators.pattern(/^((http[s]?|ftp):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.*)?(#[\w\-]+)?$/gi)
           ],
           asyncValidators: [urlExistValidator(this.request)],
           updateOn: 'blur'
         }),
-        urlShot: ['']
+        urlShot: new FormControl('', { 
+          validators: [
+            Validators.required, 
+            Validators.maxLength(8),
+            Validators.pattern('[a-zA-Z0-9]*')
+          ],
+          asyncValidators: [shortUrlValidator(this.request)],
+          updateOn: 'blur'
+        }),
       }
     )
+  }
+
+  generateUrl() {
+    this.request.generateUrl(this.urlShoterForm.value['urlOrigin']).subscribe((result:any)=>{
+      this.generatedShorUrl = result.shortUrl;
+    })
   }
 
 }
