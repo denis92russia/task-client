@@ -13,11 +13,11 @@ export class HttpRequesterService {
 
   checkUrl(url) {
     const params = new HttpParams().set('url', url);
-    return this.http.get(environment.baseUrl + '/checkUrl/', { headers: this.headers, params: params });
+    return this.http.get(environment.baseUrl + '/app/checkUrl/', { headers: this.headers, params: params });
   }
 
   generateUrl(url) {
-    return this.http.post(environment.baseUrl + '/saveUrl/', { originUrl: url }, { headers: this.headers }).pipe(map((result: any) => {
+    return this.http.post(environment.baseUrl + '/app/saveUrl/', { originUrl: url }, { headers: this.headers }).pipe(map((result: any) => {
       result.shortUrl = environment.baseUrl + '/' + result.shortUrl;
       return result;
     }));
@@ -25,6 +25,14 @@ export class HttpRequesterService {
 
   checkShortUrl(url){
     const params = new HttpParams().set('url', url);
-    return this.http.get(environment.baseUrl + '/check-short/', { headers: this.headers, params: params });
+    return this.http.get(environment.baseUrl + '/app/check-short/', { headers: this.headers, params: params });
+  }
+
+  patchShortUrl(originUrl,url) {
+    console.log('444545')
+    return this.http.put(environment.baseUrl + '/app/update-short/', { originUrl: originUrl, shortUrl: url}, { headers: this.headers }).pipe(map((result: any) => {
+      result.shortUrl = environment.baseUrl + '/' + result.shortUrl;
+      return result;
+    }));
   }
 }

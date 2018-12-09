@@ -12,7 +12,7 @@
             <div class="position-absolute error-message" *ngIf="urlShoterForm.controls.urlOrigin.hasError('notExist')">Url is not exist</div>
           </div>
 
-          <button class="create-url btn-light" [disabled]="urlShoterForm.controls.urlOrigin.invalid" (click)="generateUrl()">Create short url</button>
+          <button class="create-url btn-light" [disabled]="urlShoterForm.controls.urlOrigin.invalid || urlShoterForm.controls.urlOrigin.pending" (click)="generateUrl()">Create short url</button>
 
         </div>
       </div>
@@ -32,7 +32,7 @@
           <div class="col position-relative p-0">
             <input type="text" class="w-100" formControlName="urlShot">
           </div>
-          <button class="create-url btn-light" [disabled]="urlShoterForm.invalid" (click)="generateUrl()">Customise short url</button>
+          <button class="create-url btn-light" [disabled]="urlShoterForm.invalid || urlShoterForm.pending" (click)="patchShortUrl()">Customise short url</button>
         </div>
       </div>
     </form>

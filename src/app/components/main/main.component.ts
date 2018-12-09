@@ -47,5 +47,11 @@ export class MainComponent implements OnInit {
       this.generatedShorUrl = result.shortUrl;
     })
   }
-
+  patchShortUrl() {
+    console.log('44444')
+    this.request.patchShortUrl(this.urlShoterForm.value['urlOrigin'], this.urlShoterForm.value['urlShot'])
+    .subscribe((result:any)=>{
+      this.generatedShorUrl = result.shortUrl;
+    })
+  }
 }
