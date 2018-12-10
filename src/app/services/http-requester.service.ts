@@ -29,10 +29,14 @@ export class HttpRequesterService {
   }
 
   patchShortUrl(originUrl,url) {
-    console.log('444545')
     return this.http.put(environment.baseUrl + '/app/update-short/', { originUrl: originUrl, shortUrl: url}, { headers: this.headers }).pipe(map((result: any) => {
       result.shortUrl = environment.baseUrl + '/' + result.shortUrl;
       return result;
     }));
+  }
+
+  redirectrequest(url){
+    const params = new HttpParams().set('url', url);
+    return this.http.get(environment.baseUrl + '/app/url/redirect/'+url, { headers: this.headers});
   }
 }

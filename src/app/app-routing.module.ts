@@ -3,10 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { MainComponent } from './components/main/main.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { RedirectGuard } from './guard/redirect.guard';
 
 const routes: Routes = [
   { path: '' , component: MainComponent},
-  { path: '404', component: NotFoundComponent}
+  { path: '**', canActivate: [RedirectGuard], component: NotFoundComponent },
 ];
 
 @NgModule({

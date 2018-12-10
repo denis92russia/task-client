@@ -9,7 +9,6 @@ import { MainComponent } from './components/main/main.component';
 import { HttpRequesterService } from './services/http-requester.service';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
